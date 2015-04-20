@@ -1,7 +1,13 @@
 module Bugsnag
   module Delivery
-    module Fluent
+    class Fluent
       VERSION = "0.1.0"
     end
   end
 end
+
+
+
+
+
+
