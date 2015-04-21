@@ -24,13 +24,13 @@ module Bugsnag
   module Delivery
     class Fluent
       def self.deliver(url, body, configuration)
-        @logger ||= ::Fluent::Logger::FluentLogger.new(
+        logger = ::Fluent::Logger::FluentLogger.new(
           configuration.fluent_tag_prefix,
           :host => configuration.fluent_host,
           :port => configuration.fluent_port
         )
-        unless @logger.post('deliver', { :url => url, :body => body })
-          configuration.logger.error @logger.last_error
+        unless logger.post('deliver', { :url => url, :body => body })
+          configuration.logger.error logger.last_error
         end
       end
     end
