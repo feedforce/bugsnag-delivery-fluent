@@ -1,8 +1,6 @@
 # Bugsnag::Delivery::Fluent
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bugsnag/delivery/fluent`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem adds a `delivery_method` to [bugsnag/bugsnag-ruby](https://github.com/bugsnag/bugsnag-ruby) for sending to fluentd.
 
 ## Installation
 
@@ -22,7 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+fluentd must running. Run following code, then Bugsnag sending api payload to fluentd.
+
+```ruby
+require 'bugsnag'
+require 'bugsnag/delivery/fluent'
+
+Bugsnag.configure do |config|
+  config.api_key = "<BUGSNAG API KEY>"
+  config.delivery_method = :fluent
+  config.release_stage = 'production'
+  # config.fluent_tag_prefix = 'bugsnag'
+  # config.fluent_host = 'localhost'
+  # config.fluent_port = 24224
+end
+
+Bugsnag.notify(RuntimeError.new("bugsnag deliver to fluentd"))
+```
+
+### data
+
+```
+{ :url => url, :body => body }
+```
+
+The data tagged `bugsnag.deliver`.
 
 ## Development
 
@@ -32,7 +54,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/bugsnag-delivery-fluent/fork )
+1. Fork it ( https://github.com/koshigoe/bugsnag-delivery-fluent/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
