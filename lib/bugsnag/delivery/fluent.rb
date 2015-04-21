@@ -1,6 +1,6 @@
-require 'bugsnag/delivery/fluent/version'
-require 'bugsnag/configuration'
+require 'bugsnag'
 require 'bugsnag/delivery'
+require 'bugsnag/delivery/fluent/version'
 require 'fluent-logger'
 
 module Bugsnag
