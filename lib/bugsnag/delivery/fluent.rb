@@ -29,7 +29,7 @@ module Bugsnag
           :host => configuration.fluent_host,
           :port => configuration.fluent_port
         )
-        unless @logger.post('delivery', { :url => url, :body => body })
+        unless @logger.post('deliver', { :url => url, :body => body })
           configuration.logger.error @logger.last_error
         end
       end
