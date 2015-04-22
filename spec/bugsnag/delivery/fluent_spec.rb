@@ -18,28 +18,45 @@ describe Bugsnag::Delivery::Fluent do
 
     before do
       expect(::Fluent::Logger::FluentLogger).to receive(:new).and_return(fluent_logger)
-      expect(fluent_logger).to receive(:post).with('deliver', { :url => url, :body => body }).and_return(post_result)
     end
 
     subject { described_class.deliver(url, body, configuration) }
 
     context 'send successful' do
-      let(:post_result) { true }
+      before do
+        expect(fluent_logger).to receive(:post).with('deliver', { :url => url, :body => body }).and_return(true)
+      end
 
       it do
         expect(fluent_logger).to_not receive(:last_error)
-        expect(Bugsnag.configuration.logger).to_not receive(:error)
+        expect(Bugsnag).to_not receive(:warn)
         subject
       end
     end
 
     context 'send failed' do
-      let(:post_result) { false }
+      context 'fluent logger return false' do
+        before do
+          expect(fluent_logger).to receive(:post).with('deliver', { :url => url, :body => body }).and_return(false)
+        end
 
-      it do
-        expect(fluent_logger).to receive(:last_error).and_return('LAST ERROR')
-        expect(Bugsnag.configuration.logger).to receive(:error).with('LAST ERROR')
-        subject
+        it do
+          expect(fluent_logger).to receive(:last_error).and_return('LAST ERROR')
+          expect(Bugsnag).to receive(:warn).with('LAST ERROR')
+          subject
+        end
+      end
+
+      context 'fluent logger raise exception' do
+        before do
+          expect(fluent_logger).to receive(:post).with('deliver', { :url => url, :body => body }).and_raise
+        end
+
+        it do
+          expect(fluent_logger).to_not receive(:last_error)
+          expect(Bugsnag).to receive(:warn).exactly(2).times
+          subject
+        end
       end
     end
   end

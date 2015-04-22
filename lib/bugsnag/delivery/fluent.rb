@@ -24,13 +24,22 @@ module Bugsnag
   module Delivery
     class Fluent
       def self.deliver(url, body, configuration)
-        logger = ::Fluent::Logger::FluentLogger.new(
-          configuration.fluent_tag_prefix,
-          :host => configuration.fluent_host,
-          :port => configuration.fluent_port
-        )
-        unless logger.post('deliver', { :url => url, :body => body })
-          configuration.logger.error logger.last_error
+        begin
+          logger = ::Fluent::Logger::FluentLogger.new(
+            configuration.fluent_tag_prefix,
+            :host => configuration.fluent_host,
+            :port => configuration.fluent_port
+          )
+          if logger.post('deliver', { :url => url, :body => body })
+            Bugsnag.debug("Notification to #{url} finished, payload was #{body}")
+          else
+            Bugsnag.warn(logger.last_error)
+          end
+        rescue StandardError => e
+          raise if e.class.to_s == "RSpec::Expectations::ExpectationNotMetError"
+
+          Bugsnag.warn("Notification to #{url} failed, #{e.inspect}")
+          Bugsnag.warn(e.backtrace)
         end
       end
     end
