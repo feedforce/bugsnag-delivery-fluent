@@ -1,3 +1,6 @@
+[![Gem Version](https://badge.fury.io/rb/bugsnag-delivery-fluent.svg)](http://badge.fury.io/rb/bugsnag-delivery-fluent)
+![Build Status](https://circleci.com/gh/koshigoe/bugsnag-delivery-fluent.svg?style=shield)
+
 # Bugsnag::Delivery::Fluent
 
 This gem adds a `delivery_method` to [bugsnag/bugsnag-ruby](https://github.com/bugsnag/bugsnag-ruby) for sending to fluentd.
