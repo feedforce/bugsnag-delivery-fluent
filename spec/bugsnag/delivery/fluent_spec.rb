@@ -42,7 +42,7 @@ describe Bugsnag::Delivery::Fluent do
 
         it do
           expect(fluent_logger).to receive(:last_error).and_return('LAST ERROR')
-          expect(Bugsnag).to receive(:warn).with('LAST ERROR')
+          expect(Bugsnag).to receive(:warn).with('Notification to http://www.example.com/ failed, LAST ERROR')
           subject
         end
       end

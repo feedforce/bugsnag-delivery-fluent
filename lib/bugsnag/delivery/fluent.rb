@@ -33,7 +33,7 @@ module Bugsnag
           if logger.post('deliver', { :url => url, :body => body })
             Bugsnag.debug("Notification to #{url} finished, payload was #{body}")
           else
-            Bugsnag.warn(logger.last_error)
+            Bugsnag.warn("Notification to #{url} failed, #{logger.last_error}")
           end
         rescue StandardError => e
           raise if e.class.to_s == "RSpec::Expectations::ExpectationNotMetError"
