@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/bugsnag-delivery-fluent.svg)](http://badge.fury.io/rb/bugsnag-delivery-fluent)
-![Build Status](https://circleci.com/gh/koshigoe/bugsnag-delivery-fluent.svg?style=shield)
+![Build Status](https://circleci.com/gh/feedforce/bugsnag-delivery-fluent.svg?style=shield)
 
 # Bugsnag::Delivery::Fluent
 
@@ -57,7 +57,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/koshigoe/bugsnag-delivery-fluent/fork )
+1. Fork it ( https://github.com/feedforce/bugsnag-delivery-fluent/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

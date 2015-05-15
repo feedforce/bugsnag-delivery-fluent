@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Delivery method send to fluent for bugsnag/bugsnag-ruby.}
   spec.description   = %q{Delivery method send to fluent for bugsnag/bugsnag-ruby.}
-  spec.homepage      = "https://github.com/koshigoe/bugsnag-delivery-fluent"
+  spec.homepage      = "https://github.com/feedforce/bugsnag-delivery-fluent"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
