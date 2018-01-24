@@ -24,6 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rspec-mocks'
 
-  spec.add_runtime_dependency 'bugsnag', '~> 6.0'
+  spec.add_runtime_dependency 'bugsnag', '~> 6.0', '>= 6.6.3'
   spec.add_runtime_dependency 'fluent-logger'
 end
