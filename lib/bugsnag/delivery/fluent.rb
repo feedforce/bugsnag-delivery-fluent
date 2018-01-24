@@ -31,15 +31,15 @@ module Bugsnag
             :port => configuration.fluent_port
           )
           if logger.post('deliver', { :url => url, :body => body })
-            Bugsnag.debug("Notification to #{url} finished, payload was #{body}")
+            configuration.debug("Notification to #{url} finished, payload was #{body}")
           else
-            Bugsnag.warn("Notification to #{url} failed, #{logger.last_error}")
+            configuration.warn("Notification to #{url} failed, #{logger.last_error}")
           end
         rescue StandardError => e
           raise if e.class.to_s == "RSpec::Expectations::ExpectationNotMetError"
 
-          Bugsnag.warn("Notification to #{url} failed, #{e.inspect}")
-          Bugsnag.warn(e.backtrace)
+          configuration.warn("Notification to #{url} failed, #{e.inspect}")
+          configuration.warn(e.backtrace)
         end
       end
     end

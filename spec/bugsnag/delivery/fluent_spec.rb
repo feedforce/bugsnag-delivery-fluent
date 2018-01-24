@@ -29,7 +29,7 @@ describe Bugsnag::Delivery::Fluent do
 
       it do
         expect(fluent_logger).to_not receive(:last_error)
-        expect(Bugsnag).to_not receive(:warn)
+        expect(configuration).to_not receive(:warn)
         subject
       end
     end
@@ -42,7 +42,7 @@ describe Bugsnag::Delivery::Fluent do
 
         it do
           expect(fluent_logger).to receive(:last_error).and_return('LAST ERROR')
-          expect(Bugsnag).to receive(:warn).with('Notification to http://www.example.com/ failed, LAST ERROR')
+          expect(configuration).to receive(:warn).with('Notification to http://www.example.com/ failed, LAST ERROR')
           subject
         end
       end
@@ -54,7 +54,7 @@ describe Bugsnag::Delivery::Fluent do
 
         it do
           expect(fluent_logger).to_not receive(:last_error)
-          expect(Bugsnag).to receive(:warn).exactly(2).times
+          expect(configuration).to receive(:warn).exactly(2).times
           subject
         end
       end
