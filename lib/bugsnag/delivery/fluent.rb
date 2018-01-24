@@ -23,7 +23,7 @@ module Bugsnag
 
   module Delivery
     class Fluent
-      def self.deliver(url, body, configuration)
+      def self.deliver(url, body, configuration, options = {})
         begin
           logger = ::Fluent::Logger::FluentLogger.new(
             configuration.fluent_tag_prefix,

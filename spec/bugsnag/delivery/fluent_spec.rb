@@ -20,7 +20,7 @@ describe Bugsnag::Delivery::Fluent do
       expect(::Fluent::Logger::FluentLogger).to receive(:new).and_return(fluent_logger)
     end
 
-    subject { described_class.deliver(url, body, configuration) }
+    subject { described_class.deliver(url, body, configuration, {}) }
 
     context 'send successful' do
       before do
