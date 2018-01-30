@@ -20,11 +20,12 @@ describe Bugsnag::Delivery::Fluent do
       expect(::Fluent::Logger::FluentLogger).to receive(:new).and_return(fluent_logger)
     end
 
-    subject { described_class.deliver(url, body, configuration, {}) }
+    subject { described_class.deliver(url, body, configuration, { headers: { 'Bugsnag-Payload-Version' => '4.0' } }) }
 
     context 'send successful' do
       before do
-        expect(fluent_logger).to receive(:post).with('deliver', { :url => url, :body => body }).and_return(true)
+        data = { :url => url, :body => body, :options => { headers: { 'Bugsnag-Payload-Version' => '4.0' } } }
+        expect(fluent_logger).to receive(:post).with('deliver', data).and_return(true)
       end
 
       it do
@@ -37,7 +38,8 @@ describe Bugsnag::Delivery::Fluent do
     context 'send failed' do
       context 'fluent logger return false' do
         before do
-          expect(fluent_logger).to receive(:post).with('deliver', { :url => url, :body => body }).and_return(false)
+          data = { :url => url, :body => body, :options => { headers: { 'Bugsnag-Payload-Version' => '4.0' } } }
+          expect(fluent_logger).to receive(:post).with('deliver', data).and_return(false)
         end
 
         it do
@@ -49,7 +51,8 @@ describe Bugsnag::Delivery::Fluent do
 
       context 'fluent logger raise exception' do
         before do
-          expect(fluent_logger).to receive(:post).with('deliver', { :url => url, :body => body }).and_raise
+          data = { :url => url, :body => body, :options => { headers: { 'Bugsnag-Payload-Version' => '4.0' } } }
+          expect(fluent_logger).to receive(:post).with('deliver', data).and_raise
         end
 
         it do

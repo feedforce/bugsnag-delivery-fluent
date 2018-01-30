@@ -30,7 +30,7 @@ module Bugsnag
             :host => configuration.fluent_host,
             :port => configuration.fluent_port
           )
-          if logger.post('deliver', { :url => url, :body => body })
+          if logger.post('deliver', { :url => url, :body => body, :options => options })
             configuration.debug("Notification to #{url} finished, payload was #{body}")
           else
             configuration.warn("Notification to #{url} failed, #{logger.last_error}")
