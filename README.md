@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/bugsnag-delivery-fluent.svg)](http://badge.fury.io/rb/bugsnag-delivery-fluent)
-![Build Status](https://circleci.com/gh/feedforce/bugsnag-delivery-fluent.svg?style=shield)
+[![Build Status](https://travis-ci.org/feedforce/bugsnag-delivery-fluent.svg?branch=master)](https://travis-ci.org/feedforce/bugsnag-delivery-fluent)
 
 # Bugsnag::Delivery::Fluent
 
