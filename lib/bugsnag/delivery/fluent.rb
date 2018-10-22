@@ -24,6 +24,7 @@ module Bugsnag
   module Delivery
     class Fluent
       def self.deliver(url, body, configuration, options = {})
+        logger = nil
         begin
           logger = ::Fluent::Logger::FluentLogger.new(
             configuration.fluent_tag_prefix,
@@ -40,6 +41,8 @@ module Bugsnag
 
           configuration.warn("Notification to #{url} failed, #{e.inspect}")
           configuration.warn(e.backtrace)
+        ensure
+          logger.close if logger
         end
       end
     end
